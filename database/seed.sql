@@ -6,7 +6,7 @@ VALUES
 -- Sample project
 INSERT INTO projects (user_id, code, title, type, due_date, status, hours_estimated)
 VALUES 
-(1, 'TEST-A1', 'Test Assignment 1', 'assignment', CURRENT_DATE + INTERVAL '7 days', 'in_progress', 10);
+(1, 'TEST-A1', 'Test Assignment 1', 'assignment', CURRENT_DATE + 7, 'in_progress', 10);
 
 -- Sample tasks
 INSERT INTO tasks (project_id, title, estimated_minutes)

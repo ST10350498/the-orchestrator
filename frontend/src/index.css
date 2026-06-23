@@ -1,33 +1,94 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* stylelint-disable at-rule-no-unknown */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* stylelint-enable at-rule-no-unknown */
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    background-color: #F9FAFB;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded-lg transition duration-200 shadow-sm hover:shadow;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: box-shadow 200ms, background-color 200ms, color 200ms;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
   }
   .btn-secondary {
-    @apply bg-secondary hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200;
+    background-color: var(--secondary);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 200ms;
+  }
+  .btn-secondary:hover {
+    background-color: #0d9488;
   }
   .btn-danger {
-    @apply bg-danger hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200;
+    background-color: var(--danger);
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 200ms;
+  }
+  .btn-danger:hover {
+    background-color: #dc2626;
   }
   .btn-outline {
-    @apply border border-primary text-primary hover:bg-primary hover:text-white font-medium py-2 px-4 rounded-lg transition duration-200;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 200ms, color 200ms;
+    background-color: transparent;
+  }
+  .btn-outline:hover {
+    background-color: var(--primary);
+    color: #ffffff;
   }
   .card {
-    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.10);
+    transition: box-shadow 200ms;
+    overflow: hidden;
+  }
+  .card:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.12);
   }
   .input {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: box-shadow 200ms, border-color 200ms;
+  }
+  .input:focus {
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    border-color: #3b82f6;
   }
   .label {
-    @apply block text-sm font-medium text-gray-700 mb-1;
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
   }
 }

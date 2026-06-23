@@ -101,7 +101,7 @@ CREATE INDEX idx_ai_checks_created_at ON ai_checks(created_at);
 CREATE INDEX idx_portfolio_entries_user_id ON portfolio_entries(user_id);
 CREATE INDEX idx_weekly_reports_user_id ON weekly_reports(user_id);
 
--- Trigger for updating updated_at
+-- Function for updating timestamps
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -110,6 +110,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Triggers for updating timestamps
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_projects_updated_at BEFORE UPDATE ON projects FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_tasks_updated_at BEFORE UPDATE ON tasks FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

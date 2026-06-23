@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: orchestrator-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orchestrator
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: orchestrator-backend
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/orchestrator
+      JWT_SECRET: your-super-secret-key-change-in-production
+      NODE_ENV: production
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    container_name: orchestrator-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:5000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
